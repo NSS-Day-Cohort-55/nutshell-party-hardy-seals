@@ -4,6 +4,7 @@ import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import { MessageList } from "./Messages/MessageList"
 import { MessageForm } from "./Messages/MessageForm"
+import { MessageEditForm } from "./Messages/EditMessageForm"
 
 export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
   const PrivateOutlet = () => {
@@ -25,6 +26,7 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
           
           <Route path="/messages" element={<MessageList />} />
           <Route path="/messages/create" element={<MessageForm />} />
+          <Route path="/messages/:messageId/edit" element={<MessageEditForm />} />
           
           <Route path="/tasks" element={""} />
           
