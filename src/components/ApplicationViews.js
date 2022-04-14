@@ -5,6 +5,8 @@ import { Register } from "./auth/Register"
 import { EventList } from "./events/EventList"
 import { EventForm } from "./events/EventForm"
 import { EventForecast } from "./events/EventForecast"
+import { MessageList } from "./Messages/MessageList"
+import { MessageForm } from "./Messages/MessageForm"
 
 export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
   const PrivateOutlet = () => {
@@ -22,11 +24,13 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
         <Route path="/" element={<PrivateOutlet />} >
           <Route path="articles" element={""} />
           <Route path="friends" element={""} />
-          <Route path="messages" element={""} />
+          <Route path="messages" element={<MessageList />} />
+          <Route path="messages/create" element={<MessageForm />} />
           <Route path="tasks" element={""} />
           <Route path="events" element={ <EventList /> } />
           <Route path="events/create" element={<EventForm /> } />
           <Route path="events/:eventId/forecast" element={<EventForecast />} />
+
         </Route>
 
         <Route path="/login" element={<Login setAuthUser={setAuthUser}/>} />
