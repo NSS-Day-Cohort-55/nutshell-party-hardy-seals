@@ -24,7 +24,7 @@ export const EventForm = () => {
             name: event.name,
             date: event.date,
             location: event.location,
-            userId: parseInt(sessionStorage.getItem("nutshell_user"))
+            userId: JSON.parse(sessionStorage.getItem("nutshell_user")).id
         }
 
         addEvent(newEvent)
