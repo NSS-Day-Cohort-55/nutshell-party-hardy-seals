@@ -2,6 +2,8 @@ import React from "react"
 import { Routes, Route, Outlet, Navigate } from "react-router-dom"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { TaskForm } from "./tasks/TaskForm"
+import { Tasklist } from "./tasks/Tasklist"
 import { ArticleForm } from "./article/ArticleForm"
 import { ArticleList } from "./article/ArticleList"
 import { ArticleEditForm } from "./article/ArticleEditForm"
@@ -9,20 +11,20 @@ import { MessageList } from "./Messages/MessageList"
 import { MessageForm } from "./Messages/MessageForm"
 import { MessageEditForm } from "./Messages/EditMessageForm"
 
-export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
+export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
   const PrivateOutlet = () => {
     return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
   }
 
-  const setAuthUser = (user) => {
-    sessionStorage.setItem("nutshell_user", JSON.stringify(user))
-    setIsAuthenticated(sessionStorage.getItem("nutshell_user") !== null)
-  }
-
+ 
   return (
     <>
       <Routes>
         <Route path="/" element={<PrivateOutlet />} >
+          <Route path="friends" element={""} />
+          <Route path="tasks" element={<Tasklist />} />
+          <Route path="task/create" element={<TaskForm />} />
+          <Route path="events" element={""} />
 
           <Route path="articles" element={<ArticleList />} />
           <Route path="articles/create" element={<ArticleForm />}/>
