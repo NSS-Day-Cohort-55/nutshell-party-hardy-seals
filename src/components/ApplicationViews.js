@@ -2,6 +2,9 @@ import React from "react"
 import { Routes, Route, Outlet, Navigate } from "react-router-dom"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { EventList } from "./events/EventList"
+import { EventForm } from "./events/EventForm"
+import { EventForecast } from "./events/EventForecast"
 import { TaskForm } from "./tasks/TaskForm"
 import { Tasklist } from "./tasks/Tasklist"
 import { ArticleForm } from "./article/ArticleForm"
@@ -22,17 +25,21 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
       <Routes>
         <Route path="/" element={<PrivateOutlet />} >
           <Route path="friends" element={""} />
+
+          <Route path="events" element={ <EventList /> } />
+          <Route path="events/create" element={<EventForm /> } />
+          <Route path="events/:eventId/forecast" element={<EventForecast />} />
+
           <Route path="tasks" element={<Tasklist />} />
           <Route path="task/create" element={<TaskForm />} />
-          <Route path="events" element={""} />
 
           <Route path="articles" element={<ArticleList />} />
           <Route path="articles/create" element={<ArticleForm />}/>
           <Route path="articles/:articleId/edit" element={<ArticleEditForm />} />
           
-          <Route path="/messages" element={<MessageList />} />
-          <Route path="/messages/create" element={<MessageForm />} />
-          <Route path="/messages/:messageId/edit" element={<MessageEditForm />} />
+          <Route path="messages" element={<MessageList />} />
+          <Route path="messages/create" element={<MessageForm />} />
+          <Route path="messages/:messageId/edit" element={<MessageEditForm />} />
           
         </Route>
 
