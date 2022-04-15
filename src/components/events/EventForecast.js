@@ -25,7 +25,7 @@ export const EventForecast = () => {
     }, [])
 
 
-    //check if day is > 7 days in the future, if so, say no weather available
+    //check if day is > 7 days in the future or if the event has already past, if so, say no weather available
     return (event.date > futureDate(7) || event.date < futureDate(0) ? <>
             <h1>{event.name}</h1>
             <h2>{event.location}</h2>
