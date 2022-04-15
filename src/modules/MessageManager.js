@@ -20,16 +20,6 @@ export const addMessage = (newMessage) => {
     }).then(response => response.json())
 }
 
-export const getAllUsers = () => {
-    return fetch(`${remoteURL}/users`)
-    .then(response => response.json())
-}
-
-export const getUserById = (userId) => {
-    return fetch(`${remoteURL}/users/${userId}`)
-    .then(response => response.json())
-}
-
 export const deleteMessage = (messageId) => {
     return fetch(`${remoteURL}/messages/${messageId}`, {
         method: "DELETE"
@@ -44,4 +34,14 @@ export const updateMessage = (editedMessage) => {
         },
         body: JSON.stringify(editedMessage)
     }).then(data => data.json())
+}
+
+export const getAllUsers = () => {
+    return fetch(`${remoteURL}/users`)
+    .then(response => response.json())
+}
+
+export const getUserById = (userId) => {
+    return fetch(`${remoteURL}/users/${userId}`)
+    .then(response => response.json())
 }
