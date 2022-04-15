@@ -22,6 +22,8 @@ export const ArticleList = () => {
      getAllArticles().then(setArticles)
    }, [])
 
+   const loggedInUser = JSON.parse(sessionStorage.nutshell_user)
+
   return (
     <>
     <section className="section-content">
@@ -32,7 +34,7 @@ export const ArticleList = () => {
       </button>
     </section>
     <div className="container-cards">
-      {articles.map(article => <ArticleCard article={article} key={article.id} handleDeleteArticle={handleDeleteArticle}/>)}
+      {articles.map(article => <ArticleCard article={article} key={article.id} handleDeleteArticle={handleDeleteArticle} loggedInUser={loggedInUser}/>)}
     </div>
     </>
   )

@@ -3,7 +3,7 @@ import react from "react";
 const remoteURL = "http://localhost:8088"
 
 export const getAllArticles = () => {
-  return fetch(`${remoteURL}/articles?_sort=timestamp&_order=desc`)
+  return fetch(`${remoteURL}/articles?_sort=timestamp&_order=desc&_expand=user`)
   .then(res => res.json())
 }
 

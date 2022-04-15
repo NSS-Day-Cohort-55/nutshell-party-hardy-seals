@@ -6,12 +6,14 @@ import { dateFormat } from "./ArticleHelpers";
 
 export const ArticleForm  = () => {
   const [article, setArticle] = useState({
-      userId: parseInt(sessionStorage.getItem("nutshell_user")),
+      userId: JSON.parse(sessionStorage.nutshell_user).id,
       title: "",
       synopsis: "",
       url: "",
       timestamp: new Date()
   })
+
+  const loggedInUser = JSON.parse(sessionStorage.nutshell_user)
 
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
