@@ -1,4 +1,4 @@
-export const getAllEvents = (userId) => {
+export const getAllUsersEvents = (userId) => {
     return fetch(`http://localhost:8088/events?userId=${userId}&_sort=date`)
         .then(response => response.json())
 }
@@ -21,4 +21,9 @@ export const deleteEvent = (eventId) => {
             "Content-type": "application/json"
         }
     }).then(response => response.json())
+}
+
+export const getEventById = (eventId) => {
+    return fetch(`http://localhost:8088/events/${eventId}`)
+        .then(response => response.json())
 }

@@ -1,16 +1,16 @@
 import { EventCard } from "./EventCard";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllEvents, deleteEvent } from "../../modules/EventManager";
+import { getAllUsersEvents, deleteEvent } from "../../modules/EventManager";
 import "./Events.css"
 
 export const EventList = () => {
     const [events, setEvents] = useState([])
     const navigate = useNavigate()
-    const userId = parseInt(sessionStorage.getItem("nutshell_user"))
+    const userId = JSON.parse(sessionStorage.getItem("nutshell_user")).id
 
     const getEvents = () => {
-        return getAllEvents(userId).then(APIData => {
+        return getAllUsersEvents(userId).then(APIData => {
             setEvents(APIData)
         })
     }
