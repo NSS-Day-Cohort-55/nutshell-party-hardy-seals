@@ -2,6 +2,9 @@ import React from "react"
 import { Routes, Route, Outlet, Navigate } from "react-router-dom"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { ArticleForm } from "./article/ArticleForm"
+import { ArticleList } from "./article/ArticleList"
+import { ArticleEditForm } from "./article/ArticleEditForm"
 
 export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
   const PrivateOutlet = () => {
@@ -17,7 +20,11 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
     <>
       <Routes>
         <Route path="/" element={<PrivateOutlet />} >
-          <Route path="articles" element={""} />
+
+          <Route path="articles" element={<ArticleList />} />
+          <Route path="articles/create" element={<ArticleForm />}/>
+          <Route path="articles/:articleId/edit" element={<ArticleEditForm />} />
+
           <Route path="friends" element={""} />
           <Route path="messages" element={""} />
           <Route path="tasks" element={""} />
