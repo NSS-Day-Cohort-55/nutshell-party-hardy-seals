@@ -2,17 +2,15 @@ import React from "react"
 import { Routes, Route, Outlet, Navigate } from "react-router-dom"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { TaskForm } from "./tasks/TaskForm"
+import { Tasklist } from "./tasks/Tasklist"
 
-export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
+export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
   const PrivateOutlet = () => {
     return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
   }
 
-  const setAuthUser = (user) => {
-    sessionStorage.setItem("nutshell_user", JSON.stringify(user))
-    setIsAuthenticated(sessionStorage.getItem("nutshell_user") !== null)
-  }
-
+ 
   return (
     <>
       <Routes>
@@ -20,7 +18,8 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
           <Route path="articles" element={""} />
           <Route path="friends" element={""} />
           <Route path="messages" element={""} />
-          <Route path="tasks" element={""} />
+          <Route path="tasks" element={<Tasklist />} />
+          <Route path="task/create" element={<TaskForm />} />
           <Route path="events" element={""} />
         </Route>
 
