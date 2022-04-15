@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 export const MessageCard = ({message, handleDeleteMessage, loggedInUser}) => (
     <div className="card">
         <div className="card-content">
-            <h5>{message.user.name}</h5>
+            <div className="message-author">
+                <h5>{message.user.name}</h5>
+            </div>
             <div className="message-box">
                 <p>{message.message}</p>
                 {message.userId === loggedInUser.id ?
