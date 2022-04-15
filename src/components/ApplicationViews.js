@@ -7,6 +7,7 @@ import { ArticleList } from "./article/ArticleList"
 import { ArticleEditForm } from "./article/ArticleEditForm"
 import { MessageList } from "./Messages/MessageList"
 import { MessageForm } from "./Messages/MessageForm"
+import { MessageEditForm } from "./Messages/EditMessageForm"
 
 export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
   const PrivateOutlet = () => {
@@ -27,8 +28,9 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
           <Route path="articles/create" element={<ArticleForm />}/>
           <Route path="articles/:articleId/edit" element={<ArticleEditForm />} />
           
-          <Route path="messages" element={<MessageList />} />
-          <Route path="messages/create" element={<MessageForm />} />
+          <Route path="/messages" element={<MessageList />} />
+          <Route path="/messages/create" element={<MessageForm />} />
+          <Route path="/messages/:messageId/edit" element={<MessageEditForm />} />
           
         </Route>
 
