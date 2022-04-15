@@ -1,4 +1,4 @@
-export const EventCard = ({ event, index, handleDelete, showWeather }) => {
+export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather }) => {
     return (index > 0 ?
         <>
             <div className="card">
@@ -14,6 +14,12 @@ export const EventCard = ({ event, index, handleDelete, showWeather }) => {
                     onClick={() => showWeather(event.id)}
                     className="btn btn-primary"
                 >Show Weather
+                </button>
+                <button
+                    type="button"
+                    onClick={() => handleEdit(event.id)}
+                    className="btn btn-primary"
+                >Edit Event
                 </button>
                 <button
                     type="button"
@@ -38,6 +44,12 @@ export const EventCard = ({ event, index, handleDelete, showWeather }) => {
                     onClick={() => showWeather(event.id)}
                     className="btn btn-primary"
                 >Show Weather
+                </button>
+                <button
+                    type="button"
+                    onClick={() => handleEdit(event.id)}
+                    className="btn btn-primary"
+                >Edit Event
                 </button>
                 <button
                     type="button"
