@@ -13,8 +13,7 @@ export const MessageCard = ({message, handleDeleteMessage, loggedInUser}) => {
         setFriend({
             userId: loggedInUser.id,
             friendId: message.userId
-        })
-        
+        })   
     }, [])
 
     const handleDialogClick = () => {
