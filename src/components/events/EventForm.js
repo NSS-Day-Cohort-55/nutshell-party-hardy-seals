@@ -1,6 +1,7 @@
 import react, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addEvent } from "../../modules/EventManager";
+import { formatDatetoYYYYMMDD } from "../../helpers/DateFormatter";
 import "./EventForm.css"
 
 
@@ -85,14 +86,5 @@ export const EventForm = () => {
 
 
 const getToday = () => {
-    const now = new Date();
-    let month = (now.getMonth() + 1);
-    let day = now.getDate();
-    if (month < 10)
-        month = "0" + month;
-    if (day < 10)
-        day = "0" + day;
-    const today = now.getFullYear() + '-' + month + '-' + day;
-
-    return today
+    return formatDatetoYYYYMMDD()
 }

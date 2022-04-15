@@ -1,15 +1,15 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getEventById } from "../../modules/EventManager"
-
 import { getWeatherData } from "../../modules/WeatherManager"
+import { formatDatetoYYYYMMDD, futureDate } from "../../helpers/DateFormatter"
 
 
 
 export const EventForecast = () => {
     const [weather, setWeather] = useState([])
     const [event, setEvent] = useState({})
-        
+
     const { eventId } = useParams()
 
 
@@ -17,48 +17,31 @@ export const EventForecast = () => {
         getEventById(eventId)
             .then(event => {
                 setEvent(event)
-                return getWeatherData(event.location)
+                getWeatherData(event.location).then(forecast => {
+                    const dayOfForecast = forecast.daily.find(day => formatDatetoYYYYMMDD(new Date(day.dt * 1000)) === event.date)
+                    setWeather(dayOfForecast)
+                }) 
             })
-            .then(weather => weatherStats(weather))
-            .then(weatherStats => setWeather(weatherStats))
     }, [])
 
-    return <h1>butts</h1>
-}
 
-
-const weatherStats = (weatherArray) => {
-    const weatherStats = []
-    
-    //park data comes with a forecast every 3 hours for 5 days (40 entries), so we skip 8 indexes (24hrs) each loop
-    for (let i = 0; i < 40; i += 8) {
-        let high = -999999
-        let low = 9999999
-        let feelsLike = 0
-
-        //in order to calculate the average feels-like, high, and low temperatures, we loop through each day's worth 
-        //of weather data and find highest high, lowest low, and running tally of feelsLike (to get average after looping)
-        for (let j = i; j < i + 8; j++) {
-            if (weatherArray.list[j].main.temp_max > high) {
-                high = weatherArray.list[j].main.temp_max
-            }
-            if (weatherArray.list[j].main.temp_min < low){
-                low = weatherArray.list[j].main.temp_min
-            }
-            feelsLike += weatherArray.list[j].main.feels_like
-        }
-        //divide by 8 (24 hours) to get feelsLike average
-        feelsLike /= 8
-
-        const day = {
-            high: high,
-            low: low,
-            feelsLike: feelsLike,
-            forecast: weatherArray.list[i].weather[0].description,
-            day: weatherArray.list[i].dt_txt.split(" ")[0]
-        }
-
-        weatherStats.push(day)
-    }
-    return weatherStats
+    //check if day is > 7 days in the future, if so, say no weather available
+    return (event.date > futureDate(7) || event.date < futureDate(0) ? <>
+            <h1>{event.name}</h1>
+            <h2>{event.location}</h2>
+            <p>{event.date}</p>
+            <p>Sorry, there is no forecast for that day.</p>
+        </>
+        :
+        <>
+            <h1>{event.name}</h1>
+            <h2>{event.location}</h2>
+            <p>{event.date}</p>
+            <h2>Weather Forecast:</h2>
+            <p>High: {weather?.temp?.max} &deg;F</p>
+            <p>Low: {weather?.temp?.min} &deg;F</p>
+            <p>Feels Like: {weather?.feels_like?.day} &deg;F</p>
+            {weather.weather ? <p>Low: {weather?.weather[0].description}</p> : ""}
+        </>
+    )
 }
