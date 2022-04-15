@@ -9,7 +9,7 @@ export const TaskForm = () => {
     const saveTask = (event) => {
 
       const  newTask = {
-            userId : parseInt(sessionStorage.getItem("nutshell_user")),
+            userId : JSON.parse(sessionStorage.nutshell_user).id,
             name: task.name,
             expectedCompletion: task.expectedCompletion,
             isComplete : false
