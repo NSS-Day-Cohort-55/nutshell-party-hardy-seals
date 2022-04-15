@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
-export const NavBar = (props) => {
+export const NavBar = ({clearUser}) => {
   return (
     <nav className="navbar bg-dark text-white flex-md-nowrap p-0 shadow">
 
@@ -21,6 +21,9 @@ export const NavBar = (props) => {
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/events">Events</Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/" onClick={() => clearUser()}>Logout</Link>
         </li>
       </ul>
     </nav>
