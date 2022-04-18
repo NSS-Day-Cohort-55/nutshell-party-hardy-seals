@@ -4,9 +4,9 @@ import react from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { getUsers } from "../../modules/FriendManager";
+import { getAllFriends, getUsers } from "../../modules/FriendManager";
 import { addFriend } from "../../modules/FriendManager";
-import "./FriendForm.css" 
+import "./FriendForm.css"
 
 export const FriendForm = () => {
   const [friend, setFriend] = useState(
@@ -16,6 +16,7 @@ export const FriendForm = () => {
     })
 
   const [users, setUsers] = useState([])
+  const [friends, setFriends] = useState([])
 
   const loggedInUser = JSON.parse(sessionStorage.nutshell_user)
 
@@ -41,24 +42,30 @@ export const FriendForm = () => {
     }
   }
 
+
+
   useEffect(() => {
     getUsers().then(setUsers)
   }, [])
 
+  useEffect(() => {
+    getAllFriends(loggedInUser).then(setFriends)
+  })
+
   return (
     <form className="friendForm">
       <h2 className="friendForm__title">New Friend</h2>
-        <div className="form-group">
-          <label htmlFor="location">Choose a Buddy: </label>
-          <select value={friend.userId} name="userId" id="userId" onChange={handleControlledInputChange} className="form-control">
-            <option value="0">---</option>
-            {users.map(user => ( user.id === loggedInUser.id ? '' :
-              <option key={user.id} value={user.id}>
-                {user.name}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div className="form-group">
+        <label htmlFor="location">Choose a Buddy: </label>
+        <select value={friend.userId} name="userId" id="userId" onChange={handleControlledInputChange} className="form-control">
+          <option value="0">---</option>
+          {users.map(user => ((user.id === loggedInUser.id || friends.filter(friend => friend.userId === user.id).length > 0) ? '' :
+            <option key={user.id} value={user.id}>
+              {user.name}
+            </option>
+          ))}
+        </select>
+      </div>
       <button type="button" onClick={handleClickSaveFriend}>Add Friend</button>
     </form>
   )
