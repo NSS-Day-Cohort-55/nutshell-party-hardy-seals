@@ -50,7 +50,7 @@ export const FriendForm = () => {
 
   useEffect(() => {
     getAllFriends(loggedInUser).then(setFriends)
-  })
+  }, [])
 
   return (
     <form className="friendForm">
