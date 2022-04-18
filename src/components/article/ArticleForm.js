@@ -1,3 +1,4 @@
+// Wesley Mitchell
 import react from "react";
 import { useState } from "react";
 import { addArticle } from "../../modules/ArticleManager";
