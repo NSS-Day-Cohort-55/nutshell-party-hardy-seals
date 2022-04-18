@@ -8,6 +8,7 @@ export const MessageCard = ({message, handleDeleteMessage, loggedInUser}) => {
         userId: 0,
         friendId: 0
     })
+    const [dialog, setDialog] = useState(false)
 
     useEffect(() => {
         setFriend({
@@ -16,32 +17,18 @@ export const MessageCard = ({message, handleDeleteMessage, loggedInUser}) => {
         })   
     }, [])
 
+    // const handleDialogClick = () => {
+    //     if(loggedInUser.id !== message.userId) {
+    //         setDialog(true)
+    //     }
+    // }
+
     const handleDialogClick = () => {
-        if(loggedInUser.id !== message.userId) {
-            const dialog = document.getElementById(message.id)
-            dialog.showModal()
-        }
+            setDialog(true)
     }
 
     const handleCancelClick = () => {
-        const dialog = document.getElementById(message.id)
-        dialog.close()
-    }
-
-    const handleAddFriend = () => {
-        getFriends()
-        .then(friendsArr => {
-            friendsArr.map(friendFromFetch => {
-                if (friendFromFetch.userId === loggedInUser.id && friendFromFetch.friendId === message.userId) {
-                    console.log("logged in user", friendFromFetch.userId, "message author", friendFromFetch.friendId)
-                    const dialog = document.getElementById(message.id)
-                    dialog.close()
-                } else {
-                    console.log("this friendship should be added")
-                    addFriend(friend)
-                    const dialog = document.getElementById(message.id)
-                    dialog.close()
-                }})})    
+        setDialog(false)
     }
 
     // const handleAddFriend = () => {
@@ -62,11 +49,10 @@ export const MessageCard = ({message, handleDeleteMessage, loggedInUser}) => {
     //     })
     // }
 
-    // const handleAddFriend = () => {
-    //     addFriend(friend)
-    //     const dialog = document.getElementById(message.id)
-    //     dialog.close()
-    // }
+    const handleAddFriend = () => {
+        addFriend(friend)
+        setDialog(false)
+    }
 
     return (
     <>
