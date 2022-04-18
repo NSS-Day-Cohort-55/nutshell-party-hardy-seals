@@ -11,7 +11,6 @@ export const TaskEditForm = () => {
     const [task, setTask] = useState({name:"", expectedCompletion:""})
     const [isLoading, setIsLoading] = useState(false);
     const {taskId} = useParams()
-    console.log(useParams())
 
 
         const handleFieldChange = evt => {
