@@ -2,11 +2,13 @@ import React from "react"
 import { Routes, Route, Outlet, Navigate } from "react-router-dom"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { Home } from "./Home"
 import { EventList } from "./events/EventList"
 import { EventForm } from "./events/EventForm"
 import { EventForecast } from "./events/EventForecast"
 import { TaskForm } from "./tasks/TaskForm"
 import { Tasklist } from "./tasks/Tasklist"
+import { TaskEditForm } from "./tasks/TaskEditForm"
 import { ArticleForm } from "./article/ArticleForm"
 import { ArticleList } from "./article/ArticleList"
 import { ArticleEditForm } from "./article/ArticleEditForm"
@@ -14,7 +16,6 @@ import { MessageList } from "./Messages/MessageList"
 import { MessageForm } from "./Messages/MessageForm"
 import { MessageEditForm } from "./Messages/EditMessageForm"
 import { FriendList } from "./friends/FriendList"
-import { TaskEditForm } from "./tasks/TaskEditForm"
 
 export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
   const PrivateOutlet = () => {
@@ -26,6 +27,8 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
     <>
       <Routes>
         <Route path="/" element={<PrivateOutlet />} >
+          <Route path="/" element={<Home />} />
+
           <Route path="friends" element={<FriendList />} />
 
           <Route path="events" element={ <EventList /> } />
