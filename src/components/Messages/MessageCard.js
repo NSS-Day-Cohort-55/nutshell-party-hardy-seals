@@ -1,7 +1,7 @@
 import react, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./MessageCard.css"
-import { addFriend } from "../../modules/FriendManager";
+import { addFriend, getFriends } from "../../modules/FriendManager";
 
 export const MessageCard = ({message, handleDeleteMessage, loggedInUser}) => {
     const [friend, setFriend] = useState({
@@ -29,10 +29,44 @@ export const MessageCard = ({message, handleDeleteMessage, loggedInUser}) => {
     }
 
     const handleAddFriend = () => {
-        addFriend(friend)
-        const dialog = document.getElementById(message.id)
-        dialog.close()
+        getFriends()
+        .then(friendsArr => {
+            friendsArr.map(friendFromFetch => {
+                if (friendFromFetch.userId === loggedInUser.id && friendFromFetch.friendId === message.userId) {
+                    console.log("logged in user", friendFromFetch.userId, "message author", friendFromFetch.friendId)
+                    const dialog = document.getElementById(message.id)
+                    dialog.close()
+                } else {
+                    console.log("this friendship should be added")
+                    addFriend(friend)
+                    const dialog = document.getElementById(message.id)
+                    dialog.close()
+                }})})    
     }
+
+    // const handleAddFriend = () => {
+    //     getFriends()
+    //     .then(friendsArr => {
+    //         for (const friendFromFetch of friendsArr) {
+    //             if (friendFromFetch.userId === loggedInUser.id && friendFromFetch.friendId === message.userId) {
+    //                 console.log("logged in user", friendFromFetch.userId, "message author", friendFromFetch.friendId)
+    //                 const dialog = document.getElementById(message.id)
+    //                 dialog.close()
+    //             } else {
+    //                 console.log("this friendship should be added only if it doesn't exist yet")
+    //                 addFriend(friend)
+    //                 const dialog = document.getElementById(message.id)
+    //                 dialog.close()
+    //             }
+    //         }
+    //     })
+    // }
+
+    // const handleAddFriend = () => {
+    //     addFriend(friend)
+    //     const dialog = document.getElementById(message.id)
+    //     dialog.close()
+    // }
 
     return (
     <>
