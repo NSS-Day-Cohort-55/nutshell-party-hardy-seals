@@ -47,19 +47,8 @@ export const EventForm = () => {
     }
 
     useEffect(() => {
-        if(eventId === 0) {
-            document.querySelector("#date").valueAsDate = new Date() 
-        } else {
-            getEventById(eventId).then(event => {
-                setEvent(event)
-                document.querySelector("#name").value = event.name
-                document.querySelector("#date").value = event.date
-                document.querySelector("#location").value = event.location
-
-                return event
-            }) 
-        }
-
+        if(eventId !== 0) 
+            getEventById(eventId).then(event => setEvent(event))
     }, [])
 
     return (
@@ -73,6 +62,7 @@ export const EventForm = () => {
                         className="formControl"
                         onChange={handleFieldChange}
                         id="name"
+                        value={event.name}
                     />
                     <label htmlFor="name">Event Name</label>
                     <input
@@ -81,6 +71,7 @@ export const EventForm = () => {
                         className="formControl"
                         onChange={handleFieldChange}
                         id="date"
+                        value={event.date}
                     />
                     <label htmlFor="date">Event Date</label>
                     <input
@@ -89,6 +80,7 @@ export const EventForm = () => {
                         className="formControl"
                         onChange={handleFieldChange}
                         id="location"
+                        value={event.location}
                     />
                     <label htmlFor="location">Event Location</label>
                 </div>
