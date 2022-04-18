@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { MessageCard } from "./MessageCard";
 
 export const MessageList = () => {
+    const loggedInUser = JSON.parse(sessionStorage.nutshell_user)
+
     const [messages, setMessages] = useState([])
 
     const navigate = useNavigate()
@@ -25,7 +27,7 @@ export const MessageList = () => {
     }, [])
     
     useEffect(() => {
-    scrollToBottom()
+        scrollToBottom()
     }, [messages])
 
     const handleDeleteMessage = (id) => {
@@ -33,8 +35,6 @@ export const MessageList = () => {
         .then(() => getAllMessages().then((res) => setMessages(res)))
     } 
     
-    const loggedInUser = JSON.parse(sessionStorage.nutshell_user)
-
     return (
         <>
             <button 
