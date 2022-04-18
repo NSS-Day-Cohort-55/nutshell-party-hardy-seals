@@ -2,16 +2,20 @@
 
 import react from "react";
 import { useState } from "react";
-import { addArticle } from "../../modules/ArticleManager";
 import { useNavigate } from "react-router-dom";
-import { dateFormat } from "./ArticleHelpers";
+import { useEffect } from "react";
+import { getUsers } from "../../modules/FriendManager";
+import { addFriend } from "../../modules/FriendManager";
+import "./FriendForm.css" 
 
 export const FriendForm = () => {
   const [friend, setFriend] = useState(
     {
-      userId: "",
+      userId: 0,
       loggedUserId: JSON.parse(sessionStorage.nutshell_user).id
     })
+
+  const [users, setUsers] = useState([])
 
   const loggedInUser = JSON.parse(sessionStorage.nutshell_user)
 
@@ -20,45 +24,42 @@ export const FriendForm = () => {
 
   const handleControlledInputChange = evt => {
     const newFriend = { ...friend }
-    let selectedVal = evt.target.value
+    let selectedVal = parseInt(evt.target.value)
     newFriend[evt.target.id] = selectedVal
     setFriend(newFriend)
   }
 
-  const handleClickSaveArticle = (evt) => {
+  const handleClickSaveFriend = (evt) => {
     evt.preventDefault()
 
-    if (article.url === '' || article.title === '' || article.synopsis === '') {
-      window.alert("Please complete the full form.")
+    if (friend.userId === 0) {
+      window.alert("Please select a user from the dropdown")
       setIsLoading(false)
     } else {
       setIsLoading(true)
-      addArticle(article).then(() => navigate('/articles'))
+      addFriend(friend).then(() => navigate('/friends'))
     }
   }
 
+  useEffect(() => {
+    getUsers().then(setUsers)
+  }, [])
+
   return (
-    <form className="articleForm">
-      <h2 className="articleForm__title">New Article</h2>
-      <fieldset>
+    <form className="friendForm">
+      <h2 className="friendForm__title">New Friend</h2>
         <div className="form-group">
-          <label htmlFor="title">Title:</label>
-          <input type="test" id="title" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="Article Title" value={article.title} />
+          <label htmlFor="location">Choose a Buddy: </label>
+          <select value={friend.userId} name="userId" id="userId" onChange={handleControlledInputChange} className="form-control">
+            <option value="0">---</option>
+            {users.map(user => ( user.id === loggedInUser.id ? '' :
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
+          </select>
         </div>
-      </fieldset>
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="synopsis"> Synopsis:</label>
-          <input type="text" id="synopsis" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="Synopsis" value={article.synopsis} />
-        </div>
-      </fieldset>
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="url">URL:</label>
-          <input type="text" id="url" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="URL" value={article.url} />
-        </div>
-      </fieldset>
-      <button type="button" onClick={handleClickSaveArticle}>Save Article</button>
+      <button type="button" onClick={handleClickSaveFriend}>Add Friend</button>
     </form>
   )
 }
