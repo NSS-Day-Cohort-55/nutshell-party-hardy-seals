@@ -9,9 +9,8 @@ import { dateFormat } from "./ArticleHelpers";
 export const FriendForm = () => {
   const [friend, setFriend] = useState(
     {
-      "id": 3,
-      "userId": 1,
-      "loggedUserId": JSON.parse(sessionStorage.nutshell_user).id
+      userId: "",
+      loggedUserId: JSON.parse(sessionStorage.nutshell_user).id
     })
 
   const loggedInUser = JSON.parse(sessionStorage.nutshell_user)
@@ -20,10 +19,10 @@ export const FriendForm = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   const handleControlledInputChange = evt => {
-    const newArticle = { ...article }
+    const newFriend = { ...friend }
     let selectedVal = evt.target.value
-    newArticle[evt.target.id] = selectedVal
-    setArticle(newArticle)
+    newFriend[evt.target.id] = selectedVal
+    setFriend(newFriend)
   }
 
   const handleClickSaveArticle = (evt) => {
