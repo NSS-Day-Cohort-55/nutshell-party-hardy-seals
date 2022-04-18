@@ -1,6 +1,6 @@
 import react, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { addEvent } from "../../modules/EventManager";
+import { useNavigate, useParams } from "react-router-dom";
+import { addEvent, editEvent, getEventById } from "../../modules/EventManager";
 import { formatDatetoYYYYMMDD } from "../../helpers/DateFormatter";
 import "./EventForm.css"
 
@@ -14,10 +14,12 @@ export const EventForm = () => {
         location: "",
         userId: 0
     })
+    let {eventId} = useParams()
+    eventId = parseInt(eventId)
 
     const navigate = useNavigate()
 
-    const newEvent = () => {
+    const submitForm = () => {
         setIsLoading(true)
 
         const newEvent = {
@@ -27,8 +29,15 @@ export const EventForm = () => {
             userId: JSON.parse(sessionStorage.getItem("nutshell_user")).id
         }
 
-        addEvent(newEvent)
-            .then(() => navigate("/events"))
+        if (eventId === 0) {
+            addEvent(newEvent)
+                .then(() => navigate("/events"))
+        } else {
+            newEvent.id = eventId
+
+            editEvent(newEvent)
+                .then(() => navigate("/events"))
+        }
     }
 
     const handleFieldChange = e => {
@@ -38,7 +47,19 @@ export const EventForm = () => {
     }
 
     useEffect(() => {
-        document.querySelector("#date").valueAsDate = new Date()
+        if(eventId === 0) {
+            document.querySelector("#date").valueAsDate = new Date() 
+        } else {
+            getEventById(eventId).then(event => {
+                setEvent(event)
+                document.querySelector("#name").value = event.name
+                document.querySelector("#date").value = event.date
+                document.querySelector("#location").value = event.location
+
+                return event
+            }) 
+        }
+
     }, [])
 
     return (
@@ -74,7 +95,7 @@ export const EventForm = () => {
                 <div className="alignRight">
                     <button
                         type="button" disabled={isLoading}
-                        onClick={newEvent}
+                        onClick={submitForm}
                         className="btn btn-primary"
                     >Submit</button>
                 </div>

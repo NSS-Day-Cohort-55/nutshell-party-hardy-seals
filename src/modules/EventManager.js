@@ -3,7 +3,6 @@ export const getAllUsersEvents = (userId) => {
         .then(response => response.json())
 }
 
-
 export const addEvent = (event) => {
     return fetch(`http://localhost:8088/events`, {
         method: "POST",
@@ -26,4 +25,15 @@ export const deleteEvent = (eventId) => {
 export const getEventById = (eventId) => {
     return fetch(`http://localhost:8088/events/${eventId}`)
         .then(response => response.json())
+}
+
+export const editEvent = (event) => {
+    return fetch(`http://localhost:8088/events/${event.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(event)
+    }).then(response => response.json())
+
 }

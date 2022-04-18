@@ -27,7 +27,7 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
           <Route path="friends" element={""} />
 
           <Route path="events" element={ <EventList /> } />
-          <Route path="events/create" element={<EventForm /> } />
+          <Route path="events/:eventId" element={<EventForm /> } />
           <Route path="events/:eventId/forecast" element={<EventForecast />} />
 
           <Route path="tasks" element={<Tasklist />} />

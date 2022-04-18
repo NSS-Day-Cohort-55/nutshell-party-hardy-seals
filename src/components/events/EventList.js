@@ -19,6 +19,11 @@ export const EventList = () => {
         deleteEvent(eventId).then(getEvents)
     }
 
+    const handleEdit = (eventId) => {
+        console.log(eventId)
+        navigate(`/events/${eventId}`)
+    }
+
     const showWeather = (eventId) => {
         navigate(`/events/${eventId}/forecast`)
     }
@@ -32,7 +37,7 @@ export const EventList = () => {
             <section className="section-content">
                 <button type="button"
                     className="btn btn-primary"
-                    onClick={() => { navigate("/events/create") }}>
+                    onClick={() => { navigate("/events/0") }}>
                     Add New Event
                 </button>
             </section>
@@ -43,6 +48,7 @@ export const EventList = () => {
                         event={event}
                         index={index}
                         handleDelete={handleDelete}
+                        handleEdit={handleEdit}
                         showWeather={showWeather}
                     />)}
             </div>
