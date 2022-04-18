@@ -20,7 +20,7 @@ export const getTaskById = (taskId) => {
   }
   export const updateTask  = editedTask => {
 	return fetch(`${remoteURL}/tasks/${editedTask.id}`, {
-		method: "PUT",
+		method: "PATCH",
 		headers: {
 			"Content-Type": "application/json"
 		},

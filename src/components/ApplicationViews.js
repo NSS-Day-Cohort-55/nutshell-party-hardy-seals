@@ -14,7 +14,7 @@ import { MessageList } from "./Messages/MessageList"
 import { MessageForm } from "./Messages/MessageForm"
 import { MessageEditForm } from "./Messages/EditMessageForm"
 import { FriendList } from "./friends/FriendList"
-
+import { TaskEditForm } from "./tasks/TaskEditForm"
 
 export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
   const PrivateOutlet = () => {
@@ -34,6 +34,7 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
 
           <Route path="tasks" element={<Tasklist />} />
           <Route path="task/create" element={<TaskForm />} />
+          <Route path="/tasks/:taskId/:edit" element={ <TaskEditForm />} />
 
           <Route path="articles" element={<ArticleList />} />
           <Route path="articles/create" element={<ArticleForm />}/>
