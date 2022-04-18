@@ -13,6 +13,7 @@ import { ArticleEditForm } from "./article/ArticleEditForm"
 import { MessageList } from "./Messages/MessageList"
 import { MessageForm } from "./Messages/MessageForm"
 import { MessageEditForm } from "./Messages/EditMessageForm"
+import { Home } from "./Home"
 
 export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
   const PrivateOutlet = () => {
@@ -24,6 +25,8 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
     <>
       <Routes>
         <Route path="/" element={<PrivateOutlet />} >
+          <Route path="/" element={<Home />} />
+
           <Route path="friends" element={""} />
 
           <Route path="events" element={ <EventList /> } />
