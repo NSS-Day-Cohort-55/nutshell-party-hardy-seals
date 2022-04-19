@@ -26,7 +26,6 @@ export const MessageList = () => {
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
-
     useEffect(() => {
         Promise.all([
             getMessages(),
@@ -74,9 +73,7 @@ export const MessageList = () => {
                         loggedInUser={loggedInUser}
                         isFriend={friends.find(friend => friend.userId === message.userId || message.userId === loggedInUser.id) ? true : false}
                         handleAddFriend={handleAddFriend} /> 
-                        : ""
-                  )  )}
-
+                        : ""))}
                 <div ref={messagesEndRef}></div>
             </div>
         </>
