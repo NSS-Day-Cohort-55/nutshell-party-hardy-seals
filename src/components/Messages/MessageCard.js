@@ -1,51 +1,40 @@
 import react, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./MessageCard.css"
-import { addFriend } from "../../modules/FriendManager";
 
-export const MessageCard = ({message, handleDeleteMessage, loggedInUser}) => {
+export const MessageCard = ({message, handleDeleteMessage, loggedInUser, isFriend, handleAddFriend}) => {
     const [friend, setFriend] = useState({
         userId: 0,
-        friendId: 0
+        loggedUserId: 0
     })
+    const [dialogVisible, setDialogVisible] = useState(false)
 
     useEffect(() => {
         setFriend({
-            userId: loggedInUser.id,
-            friendId: message.userId
-        })   
+            userId: message.userId,
+            loggedUserId: loggedInUser.id
+        })
     }, [])
-
-    const handleDialogClick = () => {
-        if(loggedInUser.id !== message.userId) {
-            const dialog = document.getElementById(message.id)
-            dialog.showModal()
-        }
-    }
-
-    const handleCancelClick = () => {
-        const dialog = document.getElementById(message.id)
-        dialog.close()
-    }
-
-    const handleAddFriend = () => {
-        addFriend(friend)
-        const dialog = document.getElementById(message.id)
-        dialog.close()
-    }
 
     return (
     <>
-        <dialog id={message.id}>
+        <dialog className="dialog" id={message.id} open={dialogVisible}>
             <p>Add {message.user.name} as a friend?</p>
-            <button className="btn btn-primary" onClick={handleAddFriend}>Add</button>
-            <button className="btn btn-primary" onClick={handleCancelClick}>Cancel</button>
+            <button className="btn btn-primary" onClick={() => {handleAddFriend(friend) 
+                                                                setDialogVisible(false)}}
+                                                                >Add</button>
+            <button className="btn btn-primary" onClick={() => setDialogVisible(false)}>Cancel</button>
         </dialog>
         <div className="card">
-            <div className="card-content" onClick={handleDialogClick}>
-                <div className="message-author">
-                    <h5>{message.user.name}</h5>
-                </div>
+            <div className="card-content" >
+                {!isFriend ?
+                    <div className="not-friends" onClick={() => setDialogVisible(true)}>
+                        <h5>{message.user.name}</h5>
+                    </div>
+                    :
+                    <div>
+                        <h5>{message.user.name}</h5>
+                    </div> }
                 <div className="message-box">
                     <p>{message.message}</p>
                     {message.userId === loggedInUser.id ?
@@ -61,6 +50,7 @@ export const MessageCard = ({message, handleDeleteMessage, loggedInUser}) => {
                 </div>
             </div>
         </div>
+        
     </>
     )
 }
