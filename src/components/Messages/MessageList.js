@@ -43,11 +43,6 @@ export const MessageList = () => {
         .then(() => scrollToBottom)
     }, [])
 
-    
-    // useEffect(() => {
-    //     scrollToBottom()
-    // }, [messages])
-
     useEffect(() => {
         getAllFriends(loggedInUser)
         .then((res) => setFriends(res))
@@ -85,9 +80,7 @@ export const MessageList = () => {
                         loggedInUser={loggedInUser}
                         isFriend={friends.find(friend => friend.userId === message.userId || message.userId === loggedInUser.id) ? true : false}
                         handleAddFriend={handleAddFriend} /> 
-                        : ""
-                  )  )}
-
+                        : ""))}
                 <div ref={messagesEndRef}></div>
             </div>
         </>
