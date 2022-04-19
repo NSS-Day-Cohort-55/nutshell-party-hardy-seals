@@ -36,7 +36,7 @@ export const MessageForm = () => {
     const handleClickSendMessage = (event) => {
         event.preventDefault()
         if (message.message === "") {
-            window.alert("Not quite. Try actually filling out the form.")
+            window.alert("Please type a message before submitting")
         } else {
             setIsLoading(true)
             addMessage(message)
@@ -68,7 +68,7 @@ export const MessageForm = () => {
                 disabled={isLoading}
 				onClick={handleClickSendMessage}
                 >
-				Send Message
+				Submit Message
           </button>
 		</form>
     )
