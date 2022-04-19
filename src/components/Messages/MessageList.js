@@ -25,6 +25,8 @@ export const MessageList = () => {
     useEffect(() => {
         getMessages()
     }, [])
+
+    // setTimeout(getMessages, 2000)
     
     useEffect(() => {
         scrollToBottom()

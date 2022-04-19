@@ -57,7 +57,7 @@ export const FriendForm = () => {
       <h2 className="friendForm__title">New Friend</h2>
       <div className="form-group">
         <label htmlFor="location">Choose a Buddy: </label>
-        <select value={friend.userId} name="userId" id="userId" onChange={handleControlledInputChange} className="form-control">
+        <select value={friend.userId} name="userId" id="userId" onChange={handleControlledInputChange} className="add-friend">
           <option value="0">---</option>
           {users.map(user => ((user.id === loggedInUser.id || friends.filter(friend => friend.userId === user.id).length > 0) ? '' :
             <option key={user.id} value={user.id}>
