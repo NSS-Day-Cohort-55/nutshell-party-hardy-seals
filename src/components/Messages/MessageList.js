@@ -16,17 +16,35 @@ export const MessageList = () => {
 
     const getMessages = () => {
         return getAllMessages()
-        .then(messages => {
-            setMessages(messages)
-        })
+            .then(messages => {
+                setMessages(messages)
+            })
     }
+
+    const getFriends = () => getAllFriends(loggedInUser).then(setFriends)
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> main
     useEffect(() => {
+        Promise.all([
+            getMessages(),
+            getFriends()
+        ]).then(() => setInitialPageLoad(false))
+    }, [])
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [initialPageLoad])
+
+    setTimeout(() => {
         getMessages()
+<<<<<<< HEAD
             // .then(() => setInitialPageLoad(false))
     }, [])
 
@@ -37,28 +55,31 @@ export const MessageList = () => {
     // setTimeout(() => {
     //     getMessages()
     // }, 2000);
+=======
+    }, 2000);
+>>>>>>> main
 
     const handleDeleteMessage = (id) => {
         deleteMessage(id)
-        .then(() => getAllMessages().then((res) => setMessages(res)))
+            .then(() => getAllMessages().then((res) => setMessages(res)))
     }
-    
+
     const handleAddFriend = (friend) => {
         addFriend(friend)
-        .then(() => {
-            getAllFriends(loggedInUser)
-            .then((res) => setFriends(res))
-        })
+            .then(() => {
+                getAllFriends(loggedInUser)
+                    .then((res) => setFriends(res))
+            })
     }
-    
+
     return (
         <>
-            <button 
-                type="button" 
+            <button
+                type="button"
                 className="btn btn-primary"
-				onClick={() => {navigate("/messages/create")}}
-                >
-				New Message
+                onClick={() => { navigate("/messages/create") }}
+            >
+                New Message
             </button>
             <div className="card-container">
                 {messages.map(message =>
