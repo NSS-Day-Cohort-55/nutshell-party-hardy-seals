@@ -65,14 +65,18 @@ export const MessageList = () => {
                 New Message
             </button>
             <div className="card-container">
-                {messages.map(message =>
-                    <MessageCard
+                {messages.map(message => (
+                    message.recipientId === 0 || message.recipientId === loggedInUser.id ?  
+                    <MessageCard 
                         key={message.id}
                         message={message}
                         handleDeleteMessage={handleDeleteMessage}
                         loggedInUser={loggedInUser}
                         isFriend={friends.find(friend => friend.userId === message.userId || message.userId === loggedInUser.id) ? true : false}
-                        handleAddFriend={handleAddFriend} />)}
+                        handleAddFriend={handleAddFriend} /> 
+                        : ""
+                  )  )}
+
                 <div ref={messagesEndRef}></div>
             </div>
         </>
