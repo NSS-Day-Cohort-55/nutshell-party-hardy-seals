@@ -11,7 +11,7 @@ export const MessageList = () => {
     const [Friends, setFriends] = useState([])
 
     const navigate = useNavigate()
-    const messagesEndRef = useRef(null)
+    const messagesEndRef = useRef()
 
     const getMessages = () => {
         return getAllMessages()
@@ -24,14 +24,13 @@ export const MessageList = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
     
-    // setTimeout(getMessages, 2000)
+ 
 
     useEffect(() => {
         getMessages()
         .then(() => scrollToBottom)
     }, [])
 
-    // setTimeout(getMessages, 2000)
     
     // useEffect(() => {
     //     scrollToBottom()
