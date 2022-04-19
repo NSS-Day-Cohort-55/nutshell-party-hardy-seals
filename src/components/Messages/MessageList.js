@@ -26,11 +26,6 @@ export const MessageList = () => {
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> main
     useEffect(() => {
         Promise.all([
             getMessages(),
@@ -44,20 +39,7 @@ export const MessageList = () => {
 
     setTimeout(() => {
         getMessages()
-<<<<<<< HEAD
-            // .then(() => setInitialPageLoad(false))
-    }, [])
-
-    useEffect(() => {
-        scrollToBottom()
-    }, [initialPageLoad])
-
-    // setTimeout(() => {
-    //     getMessages()
-    // }, 2000);
-=======
     }, 2000);
->>>>>>> main
 
     const handleDeleteMessage = (id) => {
         deleteMessage(id)
