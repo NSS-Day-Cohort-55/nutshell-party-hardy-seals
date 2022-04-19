@@ -1,7 +1,7 @@
 import { EventCard } from "./EventCard";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllUsersEvents, deleteEvent } from "../../modules/EventManager";
+import { getAllUsersEvents, getAllEvents, deleteEvent } from "../../modules/EventManager";
 import "./Events.css"
 
 export const EventList = () => {
@@ -9,11 +9,11 @@ export const EventList = () => {
     const navigate = useNavigate()
     const userId = JSON.parse(sessionStorage.getItem("nutshell_user")).id
 
-    const getEvents = () => getAllUsersEvents(userId).then(setEvents)
+    const getEvents = () => getAllEvents().then(setEvents)
     
-    const handleDelete = eventId => deleteEvent(eventId).then(getEvents)
-    const handleEdit = eventId => navigate(`/events/${eventId}`)
     const showWeather = eventId => navigate(`/events/${eventId}/forecast`)
+    const handleEdit = eventId => navigate(`/events/${eventId}`)
+    const handleDelete = eventId => deleteEvent(eventId).then(getEvents)
 
     useEffect(() => {
         getEvents()
@@ -28,16 +28,19 @@ export const EventList = () => {
                     Add New Event
                 </button>
             </section>
+            <br></br>
             <div className="container-cards">
                 {events.map((event, index) =>
                     <EventCard
                         key={event.id}
                         event={event}
                         index={index}
-                        handleDelete={handleDelete}
-                        handleEdit={handleEdit}
+                        userId={userId}
                         showWeather={showWeather}
-                    />)}
+                        handleEdit={handleEdit}
+                        handleDelete={handleDelete}
+                    />
+                )}
             </div>
         </>
     )

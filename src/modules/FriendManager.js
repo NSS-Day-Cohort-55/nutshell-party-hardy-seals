@@ -8,6 +8,9 @@ export const getAllFriends = (loggedUser) => {
 export const deleteFriend = (id) => { 
   return fetch(`${remoteURL}/friends/${id}`, {
     method: "DELETE",
+    headers: {
+      "Content-type": "application/json"
+  }
   })
   .then(response => response.json())
 }

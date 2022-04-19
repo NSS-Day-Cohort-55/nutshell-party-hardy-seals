@@ -3,6 +3,11 @@ export const getAllUsersEvents = (userId) => {
         .then(response => response.json())
 }
 
+export const getAllEvents = () => {
+    return fetch(`http://localhost:8088/events?_sort=date`)
+        .then(response => response.json())
+}
+
 export const addEvent = (event) => {
     return fetch(`http://localhost:8088/events`, {
         method: "POST",
