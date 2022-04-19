@@ -16,7 +16,7 @@ export const FriendList = () => {
   const handleDeleteFriend = (id) => {
     setIsLoading(true)
     deleteFriend(id)
-      .then(() => getAllFriends()
+      .then(() => getAllFriends(loggedInUser)
         .then(setFriends))
     setIsLoading(false)
   }

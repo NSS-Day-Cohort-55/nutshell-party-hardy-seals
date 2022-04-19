@@ -31,3 +31,13 @@ export const addFriend = (newFriend) => {
         body: JSON.stringify(newFriend)
     }).then(response => response.json())
 }
+
+export const getFriends = () => {
+  return fetch(`${remoteURL}/friends`)
+  .then(response => response.json())
+}
+
+export const getUsers = () => {
+  return fetch(`${remoteURL}/users`)
+  .then(response => response.json())
+}
