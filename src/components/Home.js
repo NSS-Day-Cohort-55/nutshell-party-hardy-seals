@@ -8,7 +8,6 @@ export const Home = () => {
     const [weather, setWeather] = useState([])
     const today = formatDatetoYYYYMMDD(new Date())
 
-
     useEffect(() => {
         getWeatherData("Nashville, TN").then(forecast => {
             const dayOfForecast = forecast.daily.find(day => formatDatetoYYYYMMDD(new Date(day.dt * 1000)) === today)
@@ -16,8 +15,6 @@ export const Home = () => {
         })
     }, [])
 
-
-    //check if day is > 7 days in the future or if the event has already past, if so, say no weather available
     return (
         <>
             <h2>Today's forecast for Nashville, TN:</h2>
