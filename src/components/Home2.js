@@ -1,16 +1,5 @@
 import { useEffect, useState } from "react"
 
-export const Home2 = () => { 
-  const 
- }
-
-
-
-
-
-
-
-
 
 // export const Home = () => {
 //     const [weather, setWeather] = useState([])
