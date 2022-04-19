@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FriendCard } from "./FriendCard";
 import { deleteFriend, getAllFriends, getFriendById } from "../../modules/FriendManager";
+import "./FriendForm.css"
 
 export const FriendList = () => {
   const [friends, setFriends] = useState([])

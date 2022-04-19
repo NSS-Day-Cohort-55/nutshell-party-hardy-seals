@@ -2,11 +2,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { dateFormat } from './ArticleHelpers';
-import './ArticleCard.css'
 
-export const ArticleCard = ({ article, handleDeleteArticle, loggedInUser , isFriend}) => {
+export const FriendArticleCard = ({ article, handleDeleteArticle, loggedInUser }) => {
   return (
-    <div className={`card ${isFriend ? '': "fartparty"}`}>
+    <div className="card font-italic">
       <div className="card-content">
         <h3>Title: <span className="card-articleName">
           {article.title}

@@ -30,6 +30,8 @@ export const MessageList = () => {
         getMessages()
         .then(() => scrollToBottom)
     }, [])
+
+    // setTimeout(getMessages, 2000)
     
     // useEffect(() => {
     //     scrollToBottom()
