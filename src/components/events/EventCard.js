@@ -1,4 +1,24 @@
-export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather }) => {
+export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather, userId }) => {
+
+    const EditButtons = () => {
+        return (
+            <>
+                <button
+                    type="button"
+                    onClick={() => handleEdit(event.id)}
+                    className="btn btn-primary"
+                >Edit Event
+                </button>
+                <button
+                    type="button"
+                    onClick={() => handleDelete(event.id)}
+                    className="btn btn-danger"
+                >Delete Event
+                </button>
+            </>
+        )
+    }
+
     return (
         <>
             <div className={index > 0 ? "card" : "important-card"}>
@@ -16,18 +36,10 @@ export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather 
                         className="btn btn-info"
                     >Show Weather
                     </button>
-                    <button
-                        type="button"
-                        onClick={() => handleEdit(event.id)}
-                        className="btn btn-primary"
-                    >Edit Event
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => handleDelete(event.id)}
-                        className="btn btn-danger"
-                    >Delete Event
-                    </button>
+                    {userId === event.userId ?
+                        <EditButtons />
+                        :
+                        ""}
                 </div>
             </div>
         </>
