@@ -6,7 +6,8 @@ export const TaskCard = ({ task, deleteTask, completeTask }) => {
     
   return (
     <>
-      <div>
+    
+      <div className="something">
         <h2>{task.name}</h2>
         <div> {task.expectedCompletion}</div>
         <label htmlFor="isComplete">Task Completed</label>
