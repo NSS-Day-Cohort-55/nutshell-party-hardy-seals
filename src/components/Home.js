@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { getWeatherData } from "../modules/WeatherManager"
 import { formatDatetoYYYYMMDD } from "../helpers/DateFormatter"
+import { ArticleList } from "./article/ArticleList"
+import { EventList } from "./events/EventList"
 
 
 
@@ -25,6 +27,10 @@ export const Home = () => {
             <p>Low: {weather?.temp?.min} &deg;F</p>
             <p>Feels Like: {weather?.feels_like?.day} &deg;F</p>
             {weather.weather ? <p>Low: {weather?.weather[0].description}</p> : ""}
+            <h2>Articles</h2>
+            <ArticleList/>
+            <h2>Events</h2>
+            <EventList/>
         </>
     )
 }
