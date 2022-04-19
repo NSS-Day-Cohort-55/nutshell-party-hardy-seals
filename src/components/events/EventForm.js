@@ -4,8 +4,6 @@ import { addEvent, editEvent, getEventById } from "../../modules/EventManager";
 import { formatDatetoYYYYMMDD } from "../../helpers/DateFormatter";
 import "./EventForm.css"
 
-
-
 export const EventForm = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [event, setEvent] = useState({
@@ -14,9 +12,8 @@ export const EventForm = () => {
         location: "",
         userId: 0
     })
-    let {eventId} = useParams()
-    eventId = parseInt(eventId)
 
+    const { eventId } = parseInt(useParams())
     const navigate = useNavigate()
 
     const submitForm = () => {
@@ -48,7 +45,7 @@ export const EventForm = () => {
 
     useEffect(() => {
         if(eventId !== 0) 
-            getEventById(eventId).then(event => setEvent(event))
+            getEventById(eventId).then(setEvent)
     }, [])
 
     return (

@@ -22,7 +22,6 @@ export const getUserFriends = (user, friend) => {
   .then(res => res.json())
 }
 
-
 export const addFriend = (newFriend) => {
     return fetch(`${remoteURL}/friends`, {
         method: "POST",
