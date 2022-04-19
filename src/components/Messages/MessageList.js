@@ -8,7 +8,8 @@ export const MessageList = () => {
     const loggedInUser = JSON.parse(sessionStorage.nutshell_user)
 
     const [messages, setMessages] = useState([])
-    const [Friends, setFriends] = useState([])
+    const [friends, setFriends] = useState([])
+    const [initialPageLoad, setInitialPageLoad] = useState([true])
 
     const navigate = useNavigate()
     const messagesEndRef = useRef(null)
@@ -24,21 +25,18 @@ export const MessageList = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
     
-    // setTimeout(getMessages, 2000)
-
     useEffect(() => {
         getMessages()
-        .then(() => scrollToBottom)
+            // .then(() => setInitialPageLoad(false))
     }, [])
-    
-    // useEffect(() => {
-    //     scrollToBottom()
-    // }, [messages])
 
     useEffect(() => {
-        getAllFriends(loggedInUser)
-        .then((res) => setFriends(res))
-    }, [])
+        scrollToBottom()
+    }, [initialPageLoad])
+
+    // setTimeout(() => {
+    //     getMessages()
+    // }, 2000);
 
     const handleDeleteMessage = (id) => {
         deleteMessage(id)
@@ -69,7 +67,7 @@ export const MessageList = () => {
                         message={message}
                         handleDeleteMessage={handleDeleteMessage}
                         loggedInUser={loggedInUser}
-                        isFriend={Friends.find(friend => friend.userId === message.userId || message.userId === loggedInUser.id) ? true : false}
+                        isFriend={friends.find(friend => friend.userId === message.userId || message.userId === loggedInUser.id) ? true : false}
                         handleAddFriend={handleAddFriend} />)}
                 <div ref={messagesEndRef}></div>
             </div>
