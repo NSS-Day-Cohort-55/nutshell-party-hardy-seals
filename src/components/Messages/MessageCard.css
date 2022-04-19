@@ -1,7 +1,9 @@
-.message-author {
+.not-friends {
     cursor: pointer;
+    text-decoration: underline
 }
-
-h5 {
-    text-decoration: underline;
-}
+.dialog {
+    min-width: 15rem;
+    min-height: 5rem;
+    z-index: 5;
+  }
