@@ -7,6 +7,7 @@ export const MessageList = () => {
     const loggedInUser = JSON.parse(sessionStorage.nutshell_user)
 
     const [messages, setMessages] = useState([])
+    const [initialPageLoad, setInitialPageLoad] = useState([true])
 
     const navigate = useNavigate()
     const messagesEndRef = useRef(null)
@@ -24,11 +25,16 @@ export const MessageList = () => {
     
     useEffect(() => {
         getMessages()
+            .then(() => setInitialPageLoad(false))
     }, [])
-    
+
     useEffect(() => {
         scrollToBottom()
-    }, [messages])
+    }, [initialPageLoad])
+
+    setTimeout(() => {
+        getMessages()
+    }, 2000);
 
     const handleDeleteMessage = (id) => {
         deleteMessage(id)

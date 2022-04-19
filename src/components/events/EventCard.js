@@ -13,7 +13,7 @@ export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather 
                     <button
                         type="button"
                         onClick={() => showWeather(event.id)}
-                        className="btn btn-primary"
+                        className="btn btn-info"
                     >Show Weather
                     </button>
                     <button
@@ -25,7 +25,7 @@ export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather 
                     <button
                         type="button"
                         onClick={() => handleDelete(event.id)}
-                        className="btn btn-primary"
+                        className="btn btn-danger"
                     >Delete Event
                     </button>
                 </div>
