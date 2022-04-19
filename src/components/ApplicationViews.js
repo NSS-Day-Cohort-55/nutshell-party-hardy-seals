@@ -16,6 +16,7 @@ import { MessageList } from "./Messages/MessageList"
 import { MessageForm } from "./Messages/MessageForm"
 import { MessageEditForm } from "./Messages/EditMessageForm"
 import { FriendList } from "./friends/FriendList"
+import { FriendForm } from "./friends/FriendForm"
 
 export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
   const PrivateOutlet = () => {
@@ -30,6 +31,7 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
           <Route path="/" element={<Home />} />
 
           <Route path="friends" element={<FriendList />} />
+          <Route path="friends/create" element={<FriendForm />} />
 
           <Route path="events" element={ <EventList /> } />
           <Route path="events/:eventId" element={<EventForm /> } />
