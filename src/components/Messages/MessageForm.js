@@ -20,12 +20,10 @@ export const MessageForm = () => {
         let selectedVal = event.target.value
         if (event.target.id === "message" && event.target.value.startsWith("@")) {
             const recipientName = event.target.value.split(" ")[0].split("@")[1]
-            console.log(recipientName)
            const userObj = users.find( (user) => {
                return user.name.startsWith(recipientName)
             })
             newMessage.recipientId = userObj.id
-            console.log(userObj)
         }
         newMessage[event.target.id] = selectedVal
         setMessage(newMessage) 

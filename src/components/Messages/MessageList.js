@@ -12,7 +12,7 @@ export const MessageList = () => {
     const [initialPageLoad, setInitialPageLoad] = useState([true])
 
     const navigate = useNavigate()
-    const messagesEndRef = useRef(null)
+    const messagesEndRef = useRef()
 
     const getMessages = () => {
         return getAllMessages()
@@ -26,6 +26,7 @@ export const MessageList = () => {
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
+    
     useEffect(() => {
         Promise.all([
             getMessages(),
@@ -39,7 +40,13 @@ export const MessageList = () => {
 
     setTimeout(() => {
         getMessages()
-    }, 2000);
+        .then(() => scrollToBottom)
+    }, [])
+
+    useEffect(() => {
+        getAllFriends(loggedInUser)
+        .then((res) => setFriends(res))
+    }, [])
 
     const handleDeleteMessage = (id) => {
         deleteMessage(id)
