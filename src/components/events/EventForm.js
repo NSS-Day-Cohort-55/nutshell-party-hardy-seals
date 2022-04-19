@@ -13,7 +13,9 @@ export const EventForm = () => {
         userId: 0
     })
 
-    const { eventId } = parseInt(useParams())
+    let { eventId } = useParams()
+    eventId = parseInt(eventId)
+
     const navigate = useNavigate()
 
     const submitForm = () => {
