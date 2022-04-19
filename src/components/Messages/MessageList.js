@@ -8,7 +8,7 @@ export const MessageList = () => {
     const loggedInUser = JSON.parse(sessionStorage.nutshell_user)
 
     const [messages, setMessages] = useState([])
-    const [Friends, setFriends] = useState([])
+    const [friends, setFriends] = useState([])
     const [initialPageLoad, setInitialPageLoad] = useState([true])
 
     const navigate = useNavigate()
@@ -67,7 +67,7 @@ export const MessageList = () => {
                         message={message}
                         handleDeleteMessage={handleDeleteMessage}
                         loggedInUser={loggedInUser}
-                        isFriend={Friends.find(friend => friend.userId === message.userId || message.userId === loggedInUser.id) ? true : false}
+                        isFriend={friends.find(friend => friend.userId === message.userId || message.userId === loggedInUser.id) ? true : false}
                         handleAddFriend={handleAddFriend} />)}
                 <div ref={messagesEndRef}></div>
             </div>
