@@ -9,24 +9,11 @@ export const EventList = () => {
     const navigate = useNavigate()
     const userId = JSON.parse(sessionStorage.getItem("nutshell_user")).id
 
-    const getEvents = () => {
-        return getAllUsersEvents(userId).then(APIData => {
-            setEvents(APIData)
-        })
-    }
-
-    const handleDelete = (eventId) => {
-        deleteEvent(eventId).then(getEvents)
-    }
-
-    const handleEdit = (eventId) => {
-        console.log(eventId)
-        navigate(`/events/${eventId}`)
-    }
-
-    const showWeather = (eventId) => {
-        navigate(`/events/${eventId}/forecast`)
-    }
+    const getEvents = () => getAllUsersEvents(userId).then(setEvents)
+    
+    const handleDelete = eventId => deleteEvent(eventId).then(getEvents)
+    const handleEdit = eventId => navigate(`/events/${eventId}`)
+    const showWeather = eventId => navigate(`/events/${eventId}/forecast`)
 
     useEffect(() => {
         getEvents()

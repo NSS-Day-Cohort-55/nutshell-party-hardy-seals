@@ -1,7 +1,7 @@
 export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather }) => {
-    return (index > 0 ?
+    return (
         <>
-            <div className="card">
+            <div className={index > 0 ? "card" : "important-card"}>
                 <div className="card-content">
                     <h3>Name: <span className="card-eventname">
                         {event.name}
@@ -9,54 +9,26 @@ export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather 
                     <p>Date: {event.date}</p>
                     <p>Location: {event.location}</p>
                 </div>
-                <button
-                    type="button"
-                    onClick={() => showWeather(event.id)}
-                    className="btn btn-primary"
-                >Show Weather
-                </button>
-                <button
-                    type="button"
-                    onClick={() => handleEdit(event.id)}
-                    className="btn btn-primary"
-                >Edit Event
-                </button>
-                <button
-                    type="button"
-                    onClick={() => handleDelete(event.id)}
-                    className="btn btn-primary"
-                >Delete Event
-                </button>
-            </div>
-        </>
-        :
-        <>
-            <div className="important-card">
-                <div className="card-content">
-                    <h1>Name: <span className="card-eventname">
-                        {event.name}
-                    </span></h1>
-                    <p className="important-text">Date: {event.date}</p>
-                    <p className="important-text">Location: {event.location}</p>
+                <div>
+                    <button
+                        type="button"
+                        onClick={() => showWeather(event.id)}
+                        className="btn btn-primary"
+                    >Show Weather
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => handleEdit(event.id)}
+                        className="btn btn-primary"
+                    >Edit Event
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => handleDelete(event.id)}
+                        className="btn btn-primary"
+                    >Delete Event
+                    </button>
                 </div>
-                <button
-                    type="button"
-                    onClick={() => showWeather(event.id)}
-                    className="btn btn-primary"
-                >Show Weather
-                </button>
-                <button
-                    type="button"
-                    onClick={() => handleEdit(event.id)}
-                    className="btn btn-primary"
-                >Edit Event
-                </button>
-                <button
-                    type="button"
-                    onClick={() => handleDelete(event.id)}
-                    className="btn btn-primary"
-                >Delete Event
-                </button>
             </div>
         </>
     )
