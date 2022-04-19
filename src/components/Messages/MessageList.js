@@ -24,13 +24,16 @@ export const MessageList = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
     
+    // setTimeout(getMessages, 2000)
+
     useEffect(() => {
         getMessages()
+        .then(() => scrollToBottom)
     }, [])
     
-    useEffect(() => {
-        scrollToBottom()
-    }, [messages])
+    // useEffect(() => {
+    //     scrollToBottom()
+    // }, [messages])
 
     useEffect(() => {
         getAllFriends(loggedInUser)
