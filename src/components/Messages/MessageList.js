@@ -41,7 +41,7 @@ export const MessageList = () => {
     setTimeout(() => {
         getMessages()
         .then(() => scrollToBottom)
-    }, [])
+    }, [2000])
 
     useEffect(() => {
         getAllFriends(loggedInUser)
@@ -72,7 +72,7 @@ export const MessageList = () => {
             </button>
             <div className="card-container">
                 {messages.map(message => (
-                    message.recipientId === 0 || message.recipientId === loggedInUser.id ?  
+                    message.recipientId === 0 || message.recipientId === loggedInUser.id || message.userId === loggedInUser.id ?  
                     <MessageCard 
                         key={message.id}
                         message={message}
