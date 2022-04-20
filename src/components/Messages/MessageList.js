@@ -41,7 +41,7 @@ export const MessageList = () => {
     setTimeout(() => {
         getMessages()
         .then(() => scrollToBottom)
-    }, [])
+    }, [2000])
 
     useEffect(() => {
         getAllFriends(loggedInUser)
