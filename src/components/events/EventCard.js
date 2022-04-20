@@ -20,7 +20,7 @@ export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather,
     }
     const getClassStr = () => {
         let string = "card "
-        if(index > 0)
+        if(index === 0)
             string = "important-card"
         else if(isFriend)
             string = "friend-card"
