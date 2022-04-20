@@ -1,4 +1,4 @@
-export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather, userId }) => {
+export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather, userId, isFriend }) => {
 
     const EditButtons = () => {
         return (
@@ -18,10 +18,19 @@ export const EventCard = ({ event, index, handleDelete, handleEdit, showWeather,
             </>
         )
     }
+    const getClassStr = () => {
+        let string = "card "
+        if(index > 0)
+            string = "important-card"
+        else if(isFriend)
+            string = "friend-card"
+            
+        return string
+    }
 
     return (
         <>
-            <div className={index > 0 ? "card" : "important-card"}>
+            <div className={`${getClassStr()}`}>
                 <div className="card-content">
                     <h3>Name: <span className="card-eventname">
                         {event.name}
